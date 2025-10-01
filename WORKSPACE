@@ -7,25 +7,25 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # ============================================================================
 #
 # Dependency Versions:
-# - protobuf:       v26.0 (MODULE.bazel: 26.0.bcr.1, WORKSPACE: d6511091a0cab1ad13f676a02676ad2a0e5eb9ae)
-# - googletest:     f53219cdcb7b084ef57414efea92ee5b71989558 (2023-03-16)
+# - protobuf:       v29.3 (MODULE.bazel: 29.3, WORKSPACE: b407e8416e3893036aee5af9a12bd9b6a0e2b2e6)
+# - googletest:     v1.15.0 (2024-07-15)
 # - abseil-cpp:     Provided by protobuf_deps() - commit 4a2c63365eff8823a5221db86ef490e828306f9d (LTS 20240116.0)
-# - bazel_skylib:   Provided by protobuf_deps() - 1.3.0
-# - rules_cc:       Provided by protobuf_deps() - commit c8c38f8c710cbbf834283e4777916b68261b359c (0.0.9)
-# - rules_pkg:      Provided by protobuf_deps() - 0.7.0
-# - rules_proto:    Provided by protobuf_deps() - 5.3.0-21.7
-# - rules_python:   Provided by protobuf_deps() - 0.26.0
+# - bazel_skylib:   Provided by protobuf_deps() - 1.7.0
+# - rules_cc:       Provided by protobuf_deps() - 0.0.16
+# - rules_pkg:      Provided by protobuf_deps() - 1.0.1
+# - rules_proto:    Not provided in WORKSPACE mode (MODULE.bazel: 6.0.2)
+# - rules_python:   Provided by protobuf_deps() - 0.28.0
 # - platforms:      Provided by protobuf_deps() - 0.0.7 (MODULE.bazel: 0.0.9)
 #
 # Note: Most dependencies are automatically provided by protobuf_deps() in WORKSPACE mode
 # ============================================================================
 
-# Protobuf v26.0 - synchronized with MODULE.bazel version 26.0.bcr.1
+# Protobuf v29.3 - synchronized with MODULE.bazel version 29.3
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "5d1ffa6bd21ee09dd0a87d6126ca5b3b608f131cf1c4a4a0ccd8c141b37069b9",
-    strip_prefix = "protobuf-d6511091a0cab1ad13f676a02676ad2a0e5eb9ae",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/d6511091a0cab1ad13f676a02676ad2a0e5eb9ae.tar.gz"],  # v26.0
+    sha256 = "55912546338433f465a552e9ef09930c63b9eb697053937416890cff83a8622d",
+    strip_prefix = "protobuf-b407e8416e3893036aee5af9a12bd9b6a0e2b2e6",
+    urls = ["https://github.com/protocolbuffers/protobuf/archive/b407e8416e3893036aee5af9a12bd9b6a0e2b2e6.tar.gz"],  # v29.3
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -36,13 +36,17 @@ load("@rules_python//python:repositories.bzl", "py_repositories")
 
 py_repositories()
 
-# GoogleTest - synchronized with protobuf v26.0
+load("@rules_python//python/pip_install:repositories.bzl", "pip_install_dependencies")
+
+pip_install_dependencies()
+
+# GoogleTest v1.15.0 - synchronized with protobuf v29.3
 http_archive(
     name = "com_google_googletest",
-    sha256 = "730215d76eace9dd49bf74ce044e8daa065d175f1ac891cc1d6bb184ef94e565",
-    strip_prefix = "googletest-f53219cdcb7b084ef57414efea92ee5b71989558",
+    sha256 = "7315acb6bf10e99f332c8a43f00d5fbb1ee6ca48c52f6b936991b216c586aaad",
+    strip_prefix = "googletest-1.15.0",
     urls = [
-        "https://github.com/google/googletest/archive/f53219cdcb7b084ef57414efea92ee5b71989558.tar.gz",  # 2023-03-16
+        "https://github.com/google/googletest/releases/download/v1.15.0/googletest-1.15.0.tar.gz",  # 2024-07-15
     ],
 )
 
